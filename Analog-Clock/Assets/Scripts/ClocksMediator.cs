@@ -1,4 +1,3 @@
-
 public class ClocksMediator 
 {
     private AnalogClockBehaviour _analogClock;

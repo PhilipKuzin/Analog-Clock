@@ -9,6 +9,7 @@ public class DigitalClockBehaviour : MonoBehaviour
     {
         _clockView = GetComponentInChildren<TMP_Text>();
     }
+
     public void UpdateClock(int currentTime)
     {
         int seconds = (currentTime % 60);
@@ -17,5 +18,4 @@ public class DigitalClockBehaviour : MonoBehaviour
 
         _clockView.text = string.Format("{0:D2}:{1:D2}:{2:D2}", hours, minutes, seconds);
     }
-
 }

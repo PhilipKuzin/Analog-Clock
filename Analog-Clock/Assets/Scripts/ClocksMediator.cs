@@ -1,10 +1,10 @@
 
-public class ClockMediator 
+public class ClocksMediator 
 {
     private AnalogClockBehaviour _analogClock;
     private DigitalClockBehaviour _digitalClock;
 
-    public ClockMediator(AnalogClockBehaviour analogClock, DigitalClockBehaviour digitalClock)
+    public ClocksMediator(AnalogClockBehaviour analogClock, DigitalClockBehaviour digitalClock)
     {
         _analogClock = analogClock;
         _digitalClock = digitalClock;

@@ -9,6 +9,6 @@ public class Bootstrap : MonoBehaviour
 
     private void Awake()
     {
-        ClockMediator mediator = new ClockMediator(_analogClock, _digitalClock);
+        ClocksMediator mediator = new ClocksMediator(_analogClock, _digitalClock);
     }
 }

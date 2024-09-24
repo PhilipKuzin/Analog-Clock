@@ -13,8 +13,8 @@ public class TimeGetter : MonoBehaviour
     public void UpdateTimeFromServer()
     {
         StartCoroutine(GetTimeFromMultipleServices(
-            "https://timeapi.io/api/Time/current/zone?timeZone=Europe/Amsterdam",
-            "https://worldtimeapi.org/api/timezone/Europe/Amsterdam"));
+            "https://timeapi.io/api/Time/current/zone?timeZone=Europe/Moscow",
+            "https://worldtimeapi.org/api/timezone/Europe/Moscow"));
 
         InvokeRepeating(nameof(UpdateTimeFromServer), _timeIntervalForNextCheck, _timeIntervalForNextCheck);
     }

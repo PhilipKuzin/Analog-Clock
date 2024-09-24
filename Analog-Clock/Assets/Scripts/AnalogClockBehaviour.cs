@@ -63,10 +63,7 @@ public class AnalogClockBehaviour : MonoBehaviour
         int currentMinutes = Mathf.RoundToInt(minutesAngle / 360 * 60);
         int currentHours = Mathf.RoundToInt(hoursAngle / 360 * 12);
 
-        if (_currentTime >= 43200)
-            currentHours += 12;
-
-        currentHours = currentHours % 24;
+        currentHours = currentHours % 12;
         int resultTime = currentHours * 3600 + currentMinutes * 60 + currentSeconds;
 
         EnableTheClock();

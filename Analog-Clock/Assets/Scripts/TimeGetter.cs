@@ -7,27 +7,41 @@ public class TimeGetter : MonoBehaviour
 {
     public event Action<int> OnCurrentTimeUpdated;
 
+    private string[] _urls =
+    {
+       "https://timeapi.io/api/Time/current/zone?timeZone=Europe/Moscow",
+       "https://worldtimeapi.org/api/timezone/Europe/Moscow"
+    };
+
     private int _startTime;
     private float _timeIntervalForNextCheck = 3600f;
-    
-    public void UpdateTimeFromServer()
-    {
-        StartCoroutine(GetTimeFromMultipleServices(
-            "https://timeapi.io/api/Time/current/zone?timeZone=Europe/Moscow",
-            "https://worldtimeapi.org/api/timezone/Europe/Moscow"));
+    private float _elapsedTime = 0f;
 
-        InvokeRepeating(nameof(UpdateTimeFromServer), _timeIntervalForNextCheck, _timeIntervalForNextCheck);
+    private void Update()
+    {
+        _elapsedTime += Time.deltaTime;
+
+        if (_elapsedTime >= _timeIntervalForNextCheck)
+        {
+            _elapsedTime = 0f;
+            UpdateTimeFromServer();
+        }
     }
 
-    private IEnumerator GetTimeFromMultipleServices(string first, string second)
+    public void UpdateTimeFromServer()
     {
-        yield return StartCoroutine(GetTimeFromService(first));
+        StartCoroutine(GetTimeFromMultipleServices());
+    }
 
-        if (_startTime == 0)
-            yield return StartCoroutine(GetTimeFromService(second));
+    private IEnumerator GetTimeFromMultipleServices()
+    {
+        for (int i = 0; i < _urls.Length; i++)
+        {
+            yield return StartCoroutine(GetTimeFromService(_urls[i]));
 
-        if (_startTime == 0)
-            Debug.LogError("error of getting time from both services");
+            if (_startTime != 0)
+                yield break; 
+        }
     }
 
     private IEnumerator GetTimeFromService(string url)
